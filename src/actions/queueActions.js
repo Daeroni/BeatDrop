@@ -47,7 +47,7 @@ export const downloadSong = (identity) => (dispatch, getState) => {
             if(song) {
               dispatch({
                 type: ADD_TO_QUEUE,
-                payload: { 
+                payload: {
                   utc,
                   hash: song.hash,
                   image: `${BEATSAVER_BASE_URL}${ song.coverURL }`,
@@ -247,7 +247,7 @@ export const downloadSong = (identity) => (dispatch, getState) => {
         let utc = Date.now()
         dispatch({
           type: ADD_TO_QUEUE,
-          payload: { 
+          payload: {
             utc,
             hash: song.hash,
             image: `${BEATSAVER_BASE_URL}${ song.coverURL }`,
@@ -256,8 +256,11 @@ export const downloadSong = (identity) => (dispatch, getState) => {
           }
         })
         let req = request.get({
-          url: `${BEATSAVER_BASE_URL}/${ song.downloadURL }`,
-          encoding: null
+          url: `${BEATSAVER_BASE_URL}${ song.downloadURL }`,
+          encoding: null,
+          headers: {
+            'user-agent': window.navigator.userAgent
+          }
         }, (err, r, data) => {
           try {
             // eslint-disable-next-line
