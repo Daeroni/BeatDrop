@@ -47,7 +47,7 @@ export const downloadSong = (identity) => (dispatch, getState) => {
             if(song) {
               dispatch({
                 type: ADD_TO_QUEUE,
-                payload: { 
+                payload: {
                   utc,
                   hash: song.hash,
                   image: `${BEATSAVER_BASE_URL}${ song.coverURL }`,
@@ -57,8 +57,10 @@ export const downloadSong = (identity) => (dispatch, getState) => {
               })
               let req = request.get({
                 url: `${BEATSAVER_BASE_URL}${song.downloadURL}`,
-                headers: {'User-Agent': 'BeatDrop request'},
-                encoding: null
+                encoding: null,
+                headers: {
+                  'user-agent': window.navigator.userAgent
+                }
               }, (err, r, data) => {
                 try {
                   // eslint-disable-next-line
@@ -255,8 +257,10 @@ export const downloadSong = (identity) => (dispatch, getState) => {
         })
         let req = request.get({
           url: `${BEATSAVER_BASE_URL}${ song.downloadURL }`,
-          headers: {'User-Agent': 'BeatDrop request'},
-          encoding: null
+          encoding: null,
+          headers: {
+            'user-agent': window.navigator.userAgent
+          }
         }, (err, r, data) => {
           try {
             // eslint-disable-next-line
